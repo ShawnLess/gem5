@@ -633,6 +633,8 @@ if main['GCC'] or main['CLANG']:
     # we consistently violate
     main.Append(CCFLAGS=['-Wall', '-Wundef', '-Wextra',
                          '-Wno-sign-compare', '-Wno-unused-parameter'])
+    main.Append(CCFLAGS=['-DPROTOBUF_INLINE_NOT_IN_HEADERS=0'])
+    main.Append(CCFLAGS=['-Wno-inconsistent-missing-override'])
     # We always compile using C++11
     main.Append(CXXFLAGS=['-std=c++11'])
 else:
