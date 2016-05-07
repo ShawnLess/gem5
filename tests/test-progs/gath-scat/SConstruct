@@ -1,0 +1,10 @@
+import os
+env = Environment(ENV = os.environ)
+env.Replace(CC = "arm-linux-gnueabihf-gcc")
+
+env.Program(target='helloworld', 
+        source=['helloworld.c'],
+        LIBS = 'm',
+        LINKFLAGS = '-static')
+
+
