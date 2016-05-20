@@ -1,10 +1,94 @@
 import os
+import sys
+
+
+###############################################
+# SCons is not compatible with scipy.
+# A work around is to re import the pickle and 
+# cPickle
+import imp
+
+del sys.modules['pickle']
+del sys.modules['cPickle']
+
+sys.modules['pickle'] = imp.load_module('pickle', *imp.find_module('pickle'))
+sys.modules['cPickle'] = imp.load_module('cPickle', *imp.find_module('cPickle'))
+
+import pickle
+import cPickle
+################################################
+# This is the real stuff of the script
+
+
 env = Environment(ENV = os.environ)
 env.Replace(CC = "arm-linux-gnueabihf-gcc")
 
+#############################################
+# 1. hellowworld 
 env.Program(target = 'helloworld',
     source=['helloworld.c'],
     LIBS = 'm',
     LINKFLAGS = '-static')
 
+#############################################
+# 2. Histogram
+histPorg=env.Program(target = 'Hist.elf',
+    source=['Hist.c'],
+    CCFLAGS=['-O3'],
+    LINKFLAGS = '-static')
 
+######
+env.Object(target = 'Hist8.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3']) 
+env.Program(target = 'Hist8.elf',
+    source=['Hist8.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-NM.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DNO_MERGE'])
+env.Program(target = 'Hist8-NM.elf',
+    source=['Hist8-NM.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-P128.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DPREI128'])
+env.Program(target = 'Hist8-P128.elf',
+    source=['Hist8-P128.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-P64.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DPREI64'])
+env.Program(target = 'Hist8-P64.elf',
+    source=['Hist8-P64.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-P16.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DPREI16'])
+env.Program(target = 'Hist8-P16.elf',
+    source=['Hist8-P16.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-D16.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DPREI64','-DPLD=16'])
+env.Program(target = 'Hist8-D16.elf',
+    source=['Hist8-D16.o'],
+    LINKFLAGS = '-static')
+
+######
+env.Object(target = 'Hist8-D8.o',
+    source=['Hist8.c'],
+    CCFLAGS=['-O3','-DPREI64','-DPLD=8'])
+env.Program(target = 'Hist8-D8.elf',
+    source=['Hist8-D8.o'],
+    LINKFLAGS = '-static')
