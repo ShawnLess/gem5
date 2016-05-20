@@ -2,7 +2,7 @@
 # Generate the test programe for the histogram
 
 from scipy import misc
-import numpy 
+import numpy
 
 ########################################################
 # Generate the image data for gather operations
@@ -23,7 +23,7 @@ unsigned char imgData[%d]={
 
 
     initArray = numpy.reshape( grayImg, (rows, cols/8, 8) )
-    
+
     for row in  initArray:
         for col in row:
             lineStr += ",\t".join( [ hex(value) for value in col ] ) +",\n"
@@ -42,7 +42,7 @@ unsigned char imgData[%d]={
 
 if __name__ == "__main__":
     (rows, cols) = genData('BABOO.jpg');
- 
+
 
 
 

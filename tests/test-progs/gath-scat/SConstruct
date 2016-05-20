@@ -4,7 +4,7 @@ import sys
 
 ###############################################
 # SCons is not compatible with scipy.
-# A work around is to re import the pickle and 
+# A work around is to re import the pickle and
 # cPickle
 import imp
 
@@ -12,7 +12,7 @@ del sys.modules['pickle']
 del sys.modules['cPickle']
 
 sys.modules['pickle'] = imp.load_module('pickle', *imp.find_module('pickle'))
-sys.modules['cPickle'] = imp.load_module('cPickle', *imp.find_module('cPickle'))
+sys.modules['cPickle']=imp.load_module('cPickle',*imp.find_module('cPickle'))
 
 import pickle
 import cPickle
@@ -24,7 +24,7 @@ env = Environment(ENV = os.environ)
 env.Replace(CC = "arm-linux-gnueabihf-gcc")
 
 #############################################
-# 1. hellowworld 
+# 1. hellowworld
 env.Program(target = 'helloworld',
     source=['helloworld.c'],
     LIBS = 'm',
@@ -40,7 +40,7 @@ histPorg=env.Program(target = 'Hist.elf',
 ######
 env.Object(target = 'Hist8.o',
     source=['Hist8.c'],
-    CCFLAGS=['-O3']) 
+    CCFLAGS=['-O3'])
 env.Program(target = 'Hist8.elf',
     source=['Hist8.o'],
     LINKFLAGS = '-static')

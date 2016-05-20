@@ -1,10 +1,11 @@
 // An interleaved version of Histogram to
 // reduce the memory latency,
 #include <stdio.h>
+
 /*
 A global array contains image data
 
-unsigned char  imgData[][] ={ ... } 
+unsigned char  imgData[][] ={ ... }
 */
 #include "imgData.h"
 
@@ -40,7 +41,7 @@ int main( int argc, char *argv[] ){
     #endif
 
     unsigned char   *preLoad;
-    for( i=0; i< ROWS * COLS /8 ; i=i+8){
+    for (i=0; i< ROWS * COLS /8 ; i=i+8) {
 
         #ifdef PREI128
         /*Preload the data imgData[i+128] for later use*/

@@ -139,7 +139,7 @@ def plotCacheMiss( cacheStat):
     plt.show()
 
 ##############################
-# The help funciton 
+# The help funciton
 def Help():
     print "Run.py binfile"
     exit(1);
@@ -156,7 +156,7 @@ def printStat( statDict ):
     #Value seperated by comma
     for (binFile, cacheStat) in statDict.items():
         Val = [ "{:,}".format(v) for v in cacheStat.values() ]
-        print  row_format.format(binFile[:-4], *Val) 
+        print  row_format.format(binFile[:-4], *Val)
 
 if __name__  == '__main__':
 
